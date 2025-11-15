@@ -1,5 +1,34 @@
 # Início
 
+def ler_notas():
+    notas = []
+    for i in range(1,4):
+        if i == 1:
+            nota = float(input(f"Digite a primeira nota: ").replace(",","."))
+            notas.append(nota)
+        elif i == 2:
+            nota = float(input(f"Digite a segunda nota: ").replace(",", "."))
+            notas.append(nota)
+        else:
+            nota = float(input(f"Digite a terceira nota: ").replace(",", "."))
+            notas.append(nota)
+    return notas
+
+def calcular_media(n1, n2, n3):
+    return (n1 + n2 + n3) / 3
+
+def verificar_situacao():
+    if media_notas >= 7:
+        situacao_aluno = "aprovado"
+    elif media_notas >= 5:
+        situacao_aluno = "recuperação"
+    else:
+        situacao_aluno = "reprovado"
+    return situacao_aluno
+
+def mostrar_resultado(nome, media, resultado):
+    print(f"O aluno {nome} obteve média {media:.2f} e a sua situação é de {resultado}!")
+
 print("\n***** Sistema de Controle de Notas *****")
 
 while True:
@@ -21,27 +50,19 @@ while True:
     # Entrada do nome do aluno
     aluno = input("\nDigite o nome do aluno: ")
 
-    # Entrada das notas do aluno
-    nota1 = input("Digite a primeira nota: ").replace(",", ".")
-    nota2 = input("Digite a segunda nota: ").replace(",", ".")
-    nota3 = input("Digite a terceira nota: ").replace(",", ".")
+    # Funcao entrada das notas do aluno
+    lista_notas_aluno = ler_notas()
+    nota1 = lista_notas_aluno[0]
+    nota2 = lista_notas_aluno[1]
+    nota3 = lista_notas_aluno[2]
 
-    # Conversão para float
-    nota1 = float(nota1)
-    nota2 = float(nota2)
-    nota3 = float(nota3)
+    # Funcao calculo da media das notas do aluno
+    media_notas = calcular_media(nota1, nota2, nota3)
 
-    # Calculo da media das notas do aluno
-    media_notas = (nota1 + nota2 + nota3) / 3
+    # Funcao para verificar a situação do aluno (Aprovado/Recuperação/Reprovado)
+    situacao = verificar_situacao()
 
-    if media_notas >= 7:
-        situacao = "aprovado"
-    elif media_notas >= 5:
-        situacao = "recuperação"
-    else:
-        situacao = "reprovado"
-
-    # Exibindo a situação do aluno (Aprovado/Em recuperação/Reprovado)
-    print(f"O aluno {aluno} obteve média {media_notas:.2f} e a sua situação é de {situacao}!")
+    # Duncao exibir nome do aluno, media da nota e a situacao do aluno (Aprovado/Recuperação/Reprovado)
+    mostrar_resultado(aluno,media_notas,situacao)
 
 # Fim
